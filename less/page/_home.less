@@ -1,6 +1,7 @@
 // don't forget to delete
 @import '../base/_colors';
 @import '../utils/_breakpoints';
+@import '../utils/_keyframes';
 // don't forget to delete
 
 html {
@@ -12,13 +13,32 @@ html {
 // Header
 header {
 	max-width: 640px;
-	margin: auto;
+	margin: 0 auto;
+	margin-top: 30px;
 	text-align: center;
 }
 
 figure {
+	position: relative;
 	max-width: 332px;
-	margin: auto; 
+	margin: 0 auto; 
+	&:before, &:after {
+		content: "";
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		border-radius: 50%;
+		z-index: -1;
+		animation-name: circle;
+		animation-duration: 3s;
+		animation-timing-function: easeOut;
+		animation-fill-mode: forwards;
+		animation-iteration-count: infinite;
+	}
+	&:before { animation-delay: .3s; }
+	&:after { animation-delay: 1s; }
 	> img {
 		max-width: 100%;
 	}
