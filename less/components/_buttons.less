@@ -1,9 +1,13 @@
 @import '../base/_colors';
+@import '../utils/_mixins';
 
 .start-playing {
-	padding: 2rem 5rem;
+	.x-rem(padding-top, 2, 10);
+	.x-rem(padding-right, 5, 10);
+	.x-rem(padding-bottom, 2, 10);
+	.x-rem(padding-left, 5, 10);
 	display: inline-block;
-	font-size: 3.2rem;
+	.x-rem(font-size, 3.2, 10);
 	text-decoration: none;
 	border: 0.75px solid rgba(0, 0, 0, .1);
 	border-radius: 8px;
@@ -22,6 +26,6 @@
 		height: 40px;
 		display: inline-block;
 		vertical-align: middle;
-		margin-right: 1rem;
+		.x-rem(margin-right, 1rem, 10);
 	}
 }

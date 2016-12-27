@@ -2,6 +2,7 @@
 @import '../base/_colors';
 @import '../utils/_breakpoints';
 @import '../utils/_keyframes';
+@import '../utils/_mixins';
 // don't forget to delete
 
 html {
@@ -49,18 +50,18 @@ h1 {
 	&:after {
 		content: "1.0";
 		color: @grey-version;
-		margin-left: 1rem;
-		font-size: 2.4rem;
+		.x-rem(margin-left, 1, 10);
+		.x-rem(font-size, 2.4, 10);
 	}
 }
 
 .start-playing {
-	margin-top: 6rem;
+	.x-rem(margin-top, 6, 10);
 }
 
 // Grid section
 .grid {
-	margin-top: 12rem;
+	.x-rem(margin-top, 12, 10);
 	position: relative;
 }
 
@@ -106,8 +107,8 @@ footer {
 	background-color: @footer-bg;
 	p {
 		color: @light-text;
-		font-size: 3.2rem;
-		line-height: 5.2rem;
+		.x-rem(font-size, 3.2, 10);
+		.x-rem(line-height, 5.2, 10);
 		> span {
 			color: @pink;
 		}
@@ -118,6 +119,8 @@ footer {
 	width: 50%;
 	margin: auto;
 	padding: 4rem 0;
+	.x-rem(padding-top, 4, 10);
+	.x-rem(padding-bottom, 4, 10);
 	border-bottom: 1px solid @light-border;
 	@media (max-width: @screen-tablet) {
 		width: 70%;
@@ -131,16 +134,16 @@ footer {
 }
 
 .names {
-	margin-top: 6rem;
-	margin-bottom: 4rem;
+	.x-rem(margin-top, 6, 10);
+	.x-rem(margin-bottom, 4, 10);
 	> p {
 		color: #fff;
 	}
 }
 
 .last-sentence {
-	margin-top: 4rem;
-	margin-bottom: 4rem;
+	.x-rem(margin-top, 4, 10);
+	.x-rem(margin-bottom, 4, 10);
 	> p {
 		> span {
 			color: #fff;

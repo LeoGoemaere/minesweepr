@@ -1,3 +1,5 @@
+@import '../utils/_mixins';
+
 html {
 	font-size: 62.5%;
 }
@@ -7,17 +9,17 @@ body {
 }
 
 h1 {
-	font-size: 5.4rem;
+	.x-rem(font-size, 5.4, 10);
 	font-weight: 300;
 }
 
 h2 {
-	font-size: 4.6rem;
+	.x-rem(font-size, 4.6, 10);
 	font-weight: 300;
 }
 
 sub {
-	font-size: 2.4rem;
+	.x-rem(font-size, 2.4, 10);
 	font-weight: 400;
 }
 
