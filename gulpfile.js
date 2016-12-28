@@ -5,7 +5,8 @@ const gulp = require('gulp'),
 	  babel = require('gulp-babel'),
 	  uglify = require('gulp-uglify'),
 	  imagemin = require('gulp-imagemin'),
-	  pngquant = require('imagemin-pngquant');
+	  pngquant = require('imagemin-pngquant'),
+	  browserSync = require('browser-sync').create(),
 
 	  autoprefix = new LessAutoprefix({ browsers: ['> 0%'] });
 
@@ -36,6 +37,17 @@ gulp.task('sources', () => {
 			use: [pngquant()]
 		}))
 	.pipe(gulp.dest('dist/images'));
+});
+
+gulp.task('serve', () => {
+	browserSync.init({
+        server: {
+            baseDir: './'
+        }
+    });
+    gulp.watch('*.htm').on('change', browserSync.reload);
+    gulp.start('default');
+    gulp.watch('dis/**/*.css').on('change', browserSync.reload);
 });
 
 gulp.task('default', () => {
