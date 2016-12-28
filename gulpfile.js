@@ -45,9 +45,9 @@ gulp.task('serve', () => {
             baseDir: './'
         }
     });
-    gulp.watch('*.htm').on('change', browserSync.reload);
+    gulp.watch('*.html').on('change', browserSync.reload);
     gulp.start('default');
-    gulp.watch('dis/**/*.css').on('change', browserSync.reload);
+    gulp.watch('dist/**/*.css').on('change', browserSync.reload);
 });
 
 gulp.task('default', () => {
