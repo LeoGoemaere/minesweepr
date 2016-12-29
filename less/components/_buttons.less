@@ -10,17 +10,17 @@
 	display: inline-block;
 	.x-rem(font-size, 3.2, 10);
 	text-decoration: none;
-	background: rgba(255, 255, 255, 0.2);
+	background: rgba(255, 255, 255, 1.0);
 	border: 1px solid rgba(0, 0, 0, .1);
 	border-radius: 8px;
 	color: @blue;
 	box-shadow: 0px 2px 4px rgba(0, 0, 0, .02);
-	transition: box-shadow ease .4s, border-color ease .4s, background ease .4s;
+	transition: box-shadow ease .4s, border-color ease .4s;
 	&:hover {
 		box-shadow: 0px 8px 30px rgba(0, 122, 255, .06), 0px 4px 4px rgba(0, 0, 0, .04);
 		border-color: rgba(0, 0, 0, .14);
 		background: rgba(255, 255, 255, 1.0);
-		transition: box-shadow ease .4s, border-color ease .4s, background ease .4s;
+		transition: box-shadow ease .4s, border-color ease .4s;
 	}
 	&:before {
 		content: "";
