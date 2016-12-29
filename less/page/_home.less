@@ -32,7 +32,7 @@ header {
 	}
 	&:after {
 		z-index: 3;
-		//background: @header-gradient2;
+		background: @header-gradient2;
 	}
 }
 
@@ -47,6 +47,7 @@ figure {
 	margin: 0 auto; 
 	> img {
 		max-width: 100%;
+		left: -60px;
 	}
 }
 
@@ -71,12 +72,15 @@ h1 {
 	bottom: 0;
 	left: 0;
 	right: 0;
-	width: 100px;
-	height: 100px;
+	width: 1000px;
+	height: 1000px;
 	margin: auto;
 	border-radius: 50%;
-	//animation-name: circle;
-	animation-duration: 2s;
+	border: 1px solid rgba(0, 0, 0, 0.03);
+	background-color: rgba(0, 0, 0, 0.03);
+	opacity: 0;
+	animation-name: circle;
+	animation-duration: 15s;
 	animation-timing-function: easeOut;
 	animation-fill-mode: forwards;
 	animation-iteration-count: infinite;
@@ -84,10 +88,10 @@ h1 {
 		animation-delay: .66s;
 	}
 	&:nth-of-type(2) {
-		animation-delay: 1.32s;
+		animation-delay: 3s;
 	}
 	&:last-of-type {
-		animation-delay: 2s;
+		animation-delay: 6s;
 	}
 }
 
