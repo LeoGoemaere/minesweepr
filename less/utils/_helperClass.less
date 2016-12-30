@@ -1,21 +1,47 @@
 @import '../base/_colors';
+@import '../utils/_mixins';
 
 .pink {
-	background-color: @pink !important;
+	&:before {
+		background-color: @pink !important;
+	}
 }
 
 .blue {
-	background-color: @blue !important;
+	&:before {
+		background-color: @blue !important;
+	}
 }
 
 .white {
-	background-color: @white !important;
+	&:before {
+		background-color: @white !important;
+	}
 }
 
 .grey {
-	background-color: @grey !important;
+	&:before {
+		background-color: @grey !important;
+	}
 }
 
 .light-grey {
-	background-color: @light-grey !important;
+	&:before {
+		background-color: @light-grey !important;
+	}
+}
+
+.box {
+	&.active {
+		&:before {
+			opacity: 1;
+			transition: opacity 1s ease;
+		}
+	}
+	&.inactive {
+		&:before {
+			opacity: 0;
+			transition: opacity 1s ease;
+		}
+	}
 }
