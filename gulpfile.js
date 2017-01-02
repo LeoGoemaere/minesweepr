@@ -55,6 +55,6 @@ gulp.task('default', () => {
 });
 
 gulp.task('build', () => {
-	gulp.start(['js', 'sources']);
+	gulp.start(['js', 'sources', 'styles']);
 });
 
