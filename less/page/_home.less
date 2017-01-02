@@ -16,6 +16,13 @@ header {
 	position: relative;
 	overflow: hidden;
 	text-align: center;
+	box-sizing: border-box;
+    height: auto;
+    height: 100vh;
+    min-height: 600px;
+    @media (max-width: @screen-tablet) {
+		min-height: 560px;
+	}
 	.x-rem(padding-top, 3, 10);
 	.x-rem(padding-bottom, 12, 10);
 	&:before, &:after {
@@ -171,6 +178,10 @@ iframe {
 footer {
 	text-align: center;
 	background: url('../../images/medal.png') no-repeat center 0 @footer-bg;
+	box-sizing: border-box;
+    min-height: 650px;
+    height: auto;
+    height: 100vh;
 	p {
 		color: @light-text;
 		.x-rem(font-size, 3.2, 10);
@@ -208,7 +219,6 @@ footer {
 
 .last-sentence {
 	.x-rem(margin-top, 6, 10);
-	.x-rem(margin-bottom, 10, 10);
 	> p {
 		> span {
 			color: #fff;
