@@ -185,6 +185,7 @@ footer {
 	background: url('../../images/medal.png') no-repeat center 0 @footer-bg;
 	box-sizing: border-box;
     min-height: 650px;
+    position: relative;
     height: auto;
     height: 100vh;
 	p {
@@ -201,7 +202,7 @@ footer {
 	width: 50%;
 	margin: auto;
 	.x-rem(padding-top, 4, 10);
-	.x-rem(padding-bottom, 4, 10);
+	.x-rem(height, 9.1, 10);
 	border-bottom: 1px solid @light-border;
 	@media (max-width: @screen-tablet) {
 		width: 70%;
@@ -214,8 +215,23 @@ footer {
 	}
 }
 
+.wrap-footer {
+	position: absolute;
+	top: 13.2rem;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.content-footer {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	right: 0;
+	transform: translateY(-50%);
+}
+
 .names {
-	.x-rem(margin-top, 10, 10);
 	.x-rem(margin-bottom, 4, 10);
 	> p {
 		color: #fff;
