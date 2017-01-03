@@ -133,6 +133,26 @@ h1 {
 	border-top: 1px solid rgba(0, 0, 0, .06);
 }
 
+// test 
+.grid {
+	height: 100vh;
+	background: url("../../images/squares.svg");
+	> .row {
+		display: block;
+		height: 20vh;
+		&:nth-child(odd) {
+			background: url("../../images/squares.svg");
+			background-size: contain;
+		}
+		&:nth-child(even) {
+			background: url("../../images/squares2.svg");
+			background-size: contain;
+		}
+	}
+}
+
+// test
+
 .box {
 	position: relative;
 	display: block;
