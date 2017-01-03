@@ -133,25 +133,22 @@ h1 {
 	border-top: 1px solid rgba(0, 0, 0, .06);
 }
 
-// test 
 .grid {
 	height: 100vh;
-	background: url("../../images/squares.svg");
-	> .row {
-		display: block;
-		height: 20vh;
-		&:nth-child(odd) {
-			background: url("../../images/squares.svg");
-			background-size: contain;
-		}
-		&:nth-child(even) {
-			background: url("../../images/squares2.svg");
-			background-size: contain;
-		}
-	}
 }
 
-// test
+.content-boxes {
+	position: absolute;
+	top: 50%;
+	width: 100%;
+	transform: translateY(-50%) scale(2);
+	@media (max-width: @screen-tablet) {
+		transform: translateY(-50%) scale(2.5);
+	}
+	@media (max-width: @screen-mobile) {
+		transform: translateY(-50%) scale(5);
+	}
+}
 
 .box {
 	position: relative;
@@ -188,10 +185,18 @@ h1 {
 	margin: auto;
 }
 
+.content-video {
+	position: absolute;
+	top: 10%;
+	bottom: 10%;
+	width: 100%;
+}
+
 iframe {
 	position: absolute;
 	top: 0;
 	border: none;
+	border-top-color: 10px transparent; 
 	left: 0;
 	width: 100%;
 	height: 100%;
@@ -204,7 +209,7 @@ footer {
 	text-align: center;
 	background: url('../../images/medal.png') no-repeat center 0 @footer-bg;
 	box-sizing: border-box;
-    min-height: 650px;
+    min-height: 560px;
     position: relative;
     height: auto;
     height: 100vh;
