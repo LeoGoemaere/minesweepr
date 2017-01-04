@@ -1,100 +1,27 @@
 window.addEventListener('DOMContentLoaded', () => {
+	// Get all boxes
+	const boxes = document.querySelectorAll('.box');
 
-	const boxAnimation = document.querySelectorAll(".box");
+	const animationDelay = 3.0; // in seconds
+	const animateBox = (box) => {
+		box.classList.add('active');
+	};
+	const animateBoxes = (previousBox) => {
+		// Generate random number
+		const randomNumber = Math.floor(Math.random() * boxes.length);
+		// Get a random box from the random number
+		const randomBox = boxes[randomNumber];
 
-	let boxReveal = Math.floor((Math.random() * 3));
-	const randomBox = [];
-
-	for (var i = 0; i < 3; i++) {
-		randomBox[i] = Math.floor((Math.random() * boxAnimation.length));
-	}
-
-	class RandomBox {
-		constructor(boxs) {
-			this.boxs = boxs;
+		if (typeof previousBox != 'undefined') {
+			previousBox.classList.remove('active');
+			previousBox.classList.add('inactive');
 		}
+		// Animate the box
+		animateBox(randomBox);
+		// Recursivity
+		window.setTimeout(() => { animateBoxes(randomBox); }, animationDelay * 1000);
+	};
 
-		play(revealDelay, hideDelay) {
-
-			const randomBox = [];
-
-			for (var i = 0; i < 3; i++) {
-				randomBox[i] = Math.floor((Math.random() * boxAnimation.length));
-			}
-
-			let random_1 = Math.floor((Math.random() * boxAnimation.length));
-			let random_2 = Math.floor((Math.random() * boxAnimation.length));
-			let random_3 = Math.floor((Math.random() * boxAnimation.length));
-
-			let boxReveal = Math.floor((Math.random() * 3));
-
-			window.setTimeout(() => {
-
-				if (boxReveal === 0) {
-
-						this.boxs[randomBox[0]].classList.add('active');
-						this.boxs[randomBox[0]].classList.remove('inactive');
-
-						window.setTimeout(() => {
-
-							this.boxs[randomBox[0]].classList.add('inactive');
-							this.boxs[randomBox[0]].classList.remove('active');
-
-						}, hideDelay);
-
-					} else if (boxReveal === 1) {
-
-						this.boxs[randomBox[0]].classList.add('active');
-						this.boxs[randomBox[1]].classList.add('active');
-						this.boxs[randomBox[0]].classList.remove('inactive');
-						this.boxs[randomBox[1]].classList.remove('inactive');
-
-						window.setTimeout(() => {
-
-							this.boxs[randomBox[0]].classList.add('inactive');
-							this.boxs[randomBox[1]].classList.add('inactive');
-							this.boxs[randomBox[0]].classList.remove('active');
-							this.boxs[randomBox[1]].classList.remove('active');
-
-						}, hideDelay);
-
-					} else {
-
-						this.boxs[randomBox[0]].classList.add('active');
-						this.boxs[randomBox[1]].classList.add('active');
-						this.boxs[randomBox[2]].classList.add('active');
-						this.boxs[randomBox[0]].classList.remove('inactive');
-						this.boxs[randomBox[1]].classList.remove('inactive');
-						this.boxs[randomBox[2]].classList.remove('inactive');
-
-						window.setTimeout(() => {
-
-							this.boxs[randomBox[0]].classList.add('inactive');
-							this.boxs[randomBox[1]].classList.add('inactive');
-							this.boxs[randomBox[2]].classList.add('inactive');
-							this.boxs[randomBox[0]].classList.remove('active');
-							this.boxs[randomBox[1]].classList.remove('active');
-							this.boxs[randomBox[2]].classList.remove('active');
-
-						}, hideDelay);
-
-					}
-
-					this.play(revealDelay, hideDelay);
-
-			}, revealDelay)
-		}
-	}
-
-	const gridRandom = new RandomBox(boxAnimation);
-
-	gridRandom.play(1000, 5000);
-
-	window.addEventListener("orientationchange", function() {
-	  if (navigator.userAgent.match(/(iPhone|iPod|iPad)/i)) {
-	    document.documentElement.innerHTML = document.documentElement.innerHTML;
-	  }
-	}, false);
-
+	animateBoxes();
 
 }, false);
