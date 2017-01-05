@@ -28,15 +28,16 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	// Add styles in JS in case of browser JS is desactivate
 	const main = document.querySelector('main');
-	main.style.overflow = "hidden";
-	main.style.height = "100vh";
+	// main.style.overflow = "hidden";
+	// main.style.height = "100vh";
 
 	const slides = document.querySelectorAll('.slide');
 	const wrapSlide = document.querySelector('.wrapSlide');
 
 
 	class SlideShow {
-		constructor(slides, wrapSlide, transformValue, slidePosition) {
+		constructor(container, slides, wrapSlide, transformValue, slidePosition) {
+			this.container = container;
 			this.slides = slides;
 			this.wrapSlide = wrapSlide;
 			this.transformValue = transformValue;
@@ -45,24 +46,38 @@ window.addEventListener('DOMContentLoaded', () => {
 			this.touchStart = 0;
 			this.touchEnd = 0;
 			this.touchDown = 0;
+			this.active = false;
 		}
 		down() {
-			if (this.slidePosition < this.slides.length - 1) {
-				this.slidePosition += 1;
-				this.transformValue = this.slidePosition * (this.wrapSlide.offsetHeight / 3);
-				this.wrapSlide.style.transform = `translate3d(0px, -${this.transformValue}px, 0px)`;
+			if (this.active === true) {
+				if (this.slidePosition < this.slides.length - 1) {
+					this.slidePosition += 1;
+					this.transformValue = this.slidePosition * (this.wrapSlide.offsetHeight / 3);
+					this.wrapSlide.style.transform = `translate3d(0px, -${this.transformValue}px, 0px)`;
+				}
 			}
 		}
 		up() {
-			if (this.slidePosition > 0) {
-				this.slidePosition -= 1;
-				this.transformValue = this.transformValue - (this.wrapSlide.offsetHeight / 3);
-				this.wrapSlide.style.transform = `translate3d(0px, -${this.transformValue}px, 0px)`;
+			if (this.active === true) {
+				if (this.slidePosition > 0) {
+					this.slidePosition -= 1;
+					this.transformValue = this.transformValue - (this.wrapSlide.offsetHeight / 3);
+					this.wrapSlide.style.transform = `translate3d(0px, -${this.transformValue}px, 0px)`;
+				}				
+			}
+		}
+		activate() {
+			if (this.active === true) {
+				this.container.classList.add('activate');
+				console.log('test');
+			} else {
+				this.container.classList.remove('activate');
+				this.wrapSlide.style.transform = 'none';
 			}
 		}
 	}
 
-	const slideShow = new SlideShow(slides, wrapSlide, 0, 0);
+	const slideShow = new SlideShow(main, slides, wrapSlide, 0, 0);
 
 	document.addEventListener('wheel', (e) => {
 
@@ -91,4 +106,42 @@ window.addEventListener('DOMContentLoaded', () => {
 		}
 	}, false);
 
+	if (window.innerWidth > 768) {
+		slideShow.active = true;
+		
+		console.log(slideShow.active);
+
+	} else {
+		slideShow.active = false;
+		console.log(slideShow.active);
+	}
+	slideShow.activate();
+
+	window.addEventListener('resize', () => {
+
+		if (window.innerWidth > 768) {
+			slideShow.active = true;
+			setHeight();
+		} else {
+			slideShow.active = false;
+			setHeight();
+		}
+		slideShow.activate();
+	}, false);
+
+	// VH simulate
+
+	let innerHeight = window.innerHeight;
+
+	let setHeight = () => {
+
+		let innerHeight = window.innerHeight;
+		for (let i = 0; i < slides.length; i++) {
+			slides[i].style.height = `${innerHeight}px`;
+		}
+
+	};
+
+		setHeight();
+	
 }, false);
