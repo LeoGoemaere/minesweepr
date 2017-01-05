@@ -26,10 +26,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	// Animate slide
 
-	let slidePosition = 0;
-	let valueTransform = 0;
-	let scrollDown = false;
-
 	// Add styles in JS in case of browser JS is desactivate
 	const main = document.querySelector('main');
 	main.style.overflow = "hidden";
@@ -38,36 +34,61 @@ window.addEventListener('DOMContentLoaded', () => {
 	const slides = document.querySelectorAll('.slide');
 	const wrapSlide = document.querySelector('.wrapSlide');
 
-	const slide = () => {
 
-		if (scrollDown === true) {
-			if (slidePosition < slides.length - 1) {
-
-				slidePosition += 1;
-				valueTransform = slidePosition * (wrapSlide.offsetHeight / 3);
-				wrapSlide.style.transform = `translate3d(0px, -${valueTransform}px, 0px)`;
-				console.log(slidePosition);
-
-			}
-		} else {
-			if (slidePosition > 0) {
-
-				slidePosition -= 1;
-				valueTransform = valueTransform - (wrapSlide.offsetHeight / 3);
-				wrapSlide.style.transform = `translate3d(0px, -${valueTransform}px, 0px)`;
-				console.log(slidePosition);
-
+	class SlideShow {
+		constructor(slides, wrapSlide, transformValue, slidePosition) {
+			this.slides = slides;
+			this.wrapSlide = wrapSlide;
+			this.transformValue = transformValue;
+			this.slidePosition = slidePosition;
+			this.scrollDown = false;
+			this.touchStart = 0;
+			this.touchEnd = 0;
+			this.touchDown = 0;
+		}
+		down() {
+			if (this.slidePosition < this.slides.length - 1) {
+				this.slidePosition += 1;
+				this.transformValue = this.slidePosition * (this.wrapSlide.offsetHeight / 3);
+				this.wrapSlide.style.transform = `translate3d(0px, -${this.transformValue}px, 0px)`;
 			}
 		}
+		up() {
+			if (this.slidePosition > 0) {
+				this.slidePosition -= 1;
+				this.transformValue = this.transformValue - (this.wrapSlide.offsetHeight / 3);
+				this.wrapSlide.style.transform = `translate3d(0px, -${this.transformValue}px, 0px)`;
+			}
+		}
+	}
 
-	};
+	const slideShow = new SlideShow(slides, wrapSlide, 0, 0);
 
 	document.addEventListener('wheel', (e) => {
 
-		scrollDown = e.wheelDelta < 0 ? true : false;
-		slide();
+		slideShow.scrollDown = e.wheelDelta < 0 ? true : false;
+
+		if (slideShow.scrollDown === true) {
+			slideShow.down();
+		} else {
+			slideShow.up();
+		}
 
 	}, false);
 
+	document.addEventListener('touchstart', (e) => {
+		slideShow.touchStart = e.changedTouches[0].clientY;
+	}, false);
+
+	document.addEventListener('touchend', (e) => {
+		slideShow.touchEnd = e.changedTouches[0].clientY;
+		slideShow.touchDown = slideShow.touchEnd > slideShow.touchStart ? false : true;
+		
+		if (slideShow.touchDown === true) {
+			slideShow.down();
+		} else {
+			slideShow.up();
+		}
+	}, false);
 
 }, false);
