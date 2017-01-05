@@ -25,12 +25,8 @@ window.addEventListener('DOMContentLoaded', () => {
 	// animateBoxes();
 
 	// Animate slide
-
-	// Add styles in JS in case of browser JS is desactivate
+	
 	const main = document.querySelector('main');
-	// main.style.overflow = "hidden";
-	// main.style.height = "100vh";
-
 	const slides = document.querySelectorAll('.slide');
 	const wrapSlide = document.querySelector('.wrapSlide');
 
@@ -49,30 +45,25 @@ window.addEventListener('DOMContentLoaded', () => {
 			this.active = false;
 		}
 		down() {
-			if (this.active === true) {
-				if (this.slidePosition < this.slides.length - 1) {
-					this.slidePosition += 1;
-					this.transformValue = this.slidePosition * (this.wrapSlide.offsetHeight / 3);
-					this.wrapSlide.style.transform = `translate3d(0px, -${this.transformValue}px, 0px)`;
-				}
+			if (this.slidePosition < this.slides.length - 1) {
+				this.slidePosition += 1;
+				this.transformValue = this.slidePosition * (this.wrapSlide.offsetHeight / 3);
+				this.wrapSlide.style.transform = `translate3d(0px, -${this.transformValue}px, 0px)`;
 			}
 		}
 		up() {
-			if (this.active === true) {
-				if (this.slidePosition > 0) {
-					this.slidePosition -= 1;
-					this.transformValue = this.transformValue - (this.wrapSlide.offsetHeight / 3);
-					this.wrapSlide.style.transform = `translate3d(0px, -${this.transformValue}px, 0px)`;
-				}				
-			}
+			if (this.slidePosition > 0) {
+				this.slidePosition -= 1;
+				this.transformValue = this.transformValue - (this.wrapSlide.offsetHeight / 3);
+				this.wrapSlide.style.transform = `translate3d(0px, -${this.transformValue}px, 0px)`;
+			}				
 		}
 		activate() {
-			if (this.active === true) {
-				this.container.classList.add('activate');
-			} else {
-				this.container.classList.remove('activate');
-				this.wrapSlide.style.transform = 'none';
-			}
+			this.container.classList.add('activate');
+		}
+		desactivate() {
+			this.container.classList.remove('activate');
+			this.wrapSlide.style.transform = 'none';
 		}
 		setHeight() {
 			let innerHeight = window.innerHeight;
@@ -84,62 +75,95 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	const slideShow = new SlideShow(main, slides, wrapSlide, 0, 0);
 
+	// NEW SLIDE SHOW
+
+	// Check if browser mobile
+	function detectmob() { 
+	 if( navigator.userAgent.match(/Android/i)
+	 || navigator.userAgent.match(/webOS/i)
+	 || navigator.userAgent.match(/iPhone/i)
+	 || navigator.userAgent.match(/iPad/i)
+	 || navigator.userAgent.match(/iPod/i)
+	 || navigator.userAgent.match(/BlackBerry/i)
+	 || navigator.userAgent.match(/Windows Phone/i)
+	 ){
+	    return true;
+	  }
+	 else {
+	    return false;
+	  }
+	}
+
+	// Init function : run slideShow script if detectmob is false
+	const init = () => {
+		if (detectmob()) {
+			slideShow.active = false;
+			slideShow.desactivate();
+		} else {
+			slideShow.active = true;
+			slideShow.activate();
+		}		
+	}
+
+	// Initialization slideShow on load
+	init();
+
+	// Fallback vh unit :
+	// Set slide to 100% viewport height on load
+	slideShow.setHeight();
+
 	document.addEventListener('wheel', (e) => {
 
+		// Determinate user scroll direction
 		slideShow.scrollDown = e.wheelDelta < 0 ? true : false;
 
-		if (slideShow.scrollDown === true) {
-			slideShow.down();
-			console.log(slideShow.slidePosition);
-		} else {
-			slideShow.up();
-			console.log(slideShow.slidePosition);
+		// Play slideShow on scroll
+		if (slideShow.active === true) {
+			if (slideShow.scrollDown === true) {
+				slideShow.down();
+			} else {
+				slideShow.up();
+			}			
 		}
 
 	}, false);
 
 	document.addEventListener('touchstart', (e) => {
+
+		// Check coordinates of touch start
 		slideShow.touchStart = e.changedTouches[0].clientY;
+
 	}, false);
 
 	document.addEventListener('touchend', (e) => {
+
+		// Check coordinate of touch end
 		slideShow.touchEnd = e.changedTouches[0].clientY;
+
+		// Determinate user touch direction
 		slideShow.touchDown = slideShow.touchEnd > slideShow.touchStart ? false : true;
 		
-		if (slideShow.touchDown === true) {
-			slideShow.down();
-		} else {
-			slideShow.up();
+		// Play slideShow on touch
+		if (slideShow.active === true) {
+			if (slideShow.touchDown === true) {
+				slideShow.down();
+			} else {
+				slideShow.up();
+			}
 		}
-	}, false);
 
-	if (window.innerWidth > 768) {
-		slideShow.active = true;
-	} else {
-		slideShow.active = false;
-	}
-	slideShow.activate();
+	}, false);
 
 	window.addEventListener('resize', () => {
 
-		if (window.innerWidth > 768) {
-			slideShow.active = true;
-			slideShow.slidePosition = 0;
-			slideShow.setHeight();
-		} else {
-			slideShow.active = false;
-			slideShow.slidePosition = 0;
-			slideShow.setHeight();
-		}
-		slideShow.activate();
+		// Re-initialization slideShow on resize
+		init();
 
+		// Re-calculate 100% viewport height on resize
+		slideShow.setHeight();
 		
 	}, false);
 
-
-
-
-	slideShow.setHeight();
-
+	// NEW SLIDE SHOW
 	
 }, false);
