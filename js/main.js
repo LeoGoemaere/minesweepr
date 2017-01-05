@@ -25,7 +25,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	// animateBoxes();
 
 	// Animate slide
-	
+
 	const main = document.querySelector('main');
 	const slides = document.querySelectorAll('.slide');
 	const wrapSlide = document.querySelector('.wrapSlide');
@@ -159,11 +159,27 @@ window.addEventListener('DOMContentLoaded', () => {
 		// Re-initialization slideShow on resize
 		init();
 
-		// Re-calculate 100% viewport height on resize
-		slideShow.setHeight();
-		
+		// Re-calculate 100% viewport desktop height on resize
+		if (detectmob() === false) {
+			slideShow.setHeight();
+		}
 	}, false);
 
 	// NEW SLIDE SHOW
+
+	const mql = window.matchMedia("(orientation: portrait)");
+	
+	if (detectmob()) {
+		mql.addListener(handleOrientationChange);
+		handleOrientationChange(mql);		
+	}
+
+	function handleOrientationChange(mql) {
+	  if (mql.matches) {
+	    slideShow.setHeight();
+	  } else {
+	    slideShow.setHeight();
+	  }
+	}
 	
 }, false);
