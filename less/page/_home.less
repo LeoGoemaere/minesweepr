@@ -17,8 +17,12 @@ body {
 }
 
 .wrapSlide {
-	height: 300vh;
+	// height: 300vh;
 	transition: all .4s ease;
+}
+
+main {
+	overflow: hidden;
 }
 
 // Header
@@ -27,7 +31,8 @@ header {
 	overflow: hidden;
 	text-align: center;
 	box-sizing: border-box;
-    height: 33.33%;
+	height: 600px;
+    height: 100vh;
     min-height: 600px;
     @media (max-width: @screen-tablet) {
 		min-height: 560px;
@@ -143,7 +148,9 @@ h1 {
 }
 
 .grid {
-	height: 33.33%;
+	height: 500px;
+    height: 100vh;
+    min-height: 500px; 
 }
 
 .content-boxes {
@@ -182,6 +189,13 @@ h1 {
 	}
 }
 
+.wrap-video {
+	max-width: 1200px;
+    height: 100%;
+    position: relative;
+    margin: auto;
+}
+
 .video {
 	position: absolute;
 	padding-bottom: 48.25%;
@@ -218,9 +232,10 @@ footer {
 	text-align: center;
 	background: url('../../images/medal.png') no-repeat center 0 @footer-bg;
 	box-sizing: border-box;
-    min-height: 560px;
     position: relative;
-    height: 33.33%;
+    height: 560px;
+    height: 100vh;
+    min-height: 560px;
 	p {
 		color: @light-text;
 		.x-rem(font-size, 2.8, 10);
