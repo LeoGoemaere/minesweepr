@@ -69,10 +69,15 @@ window.addEventListener('DOMContentLoaded', () => {
 		activate() {
 			if (this.active === true) {
 				this.container.classList.add('activate');
-				console.log('test');
 			} else {
 				this.container.classList.remove('activate');
 				this.wrapSlide.style.transform = 'none';
+			}
+		}
+		setHeight() {
+			let innerHeight = window.innerHeight;
+			for (let i = 0; i < this.slides.length; i++) {
+				this.slides[i].style.height = `${innerHeight}px`;
 			}
 		}
 	}
@@ -85,8 +90,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
 		if (slideShow.scrollDown === true) {
 			slideShow.down();
+			console.log(slideShow.slidePosition);
 		} else {
 			slideShow.up();
+			console.log(slideShow.slidePosition);
 		}
 
 	}, false);
@@ -108,12 +115,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	if (window.innerWidth > 768) {
 		slideShow.active = true;
-		
-		console.log(slideShow.active);
-
 	} else {
 		slideShow.active = false;
-		console.log(slideShow.active);
 	}
 	slideShow.activate();
 
@@ -121,27 +124,22 @@ window.addEventListener('DOMContentLoaded', () => {
 
 		if (window.innerWidth > 768) {
 			slideShow.active = true;
-			setHeight();
+			slideShow.slidePosition = 0;
+			slideShow.setHeight();
 		} else {
 			slideShow.active = false;
-			setHeight();
+			slideShow.slidePosition = 0;
+			slideShow.setHeight();
 		}
 		slideShow.activate();
+
+		
 	}, false);
 
-	// VH simulate
 
-	let innerHeight = window.innerHeight;
 
-	let setHeight = () => {
 
-		let innerHeight = window.innerHeight;
-		for (let i = 0; i < slides.length; i++) {
-			slides[i].style.height = `${innerHeight}px`;
-		}
+	slideShow.setHeight();
 
-	};
-
-		setHeight();
 	
 }, false);
