@@ -113,7 +113,6 @@ window.addEventListener('DOMContentLoaded', () => {
 	slideShow.setHeight();
 
 	document.addEventListener('wheel', (e) => {
-
 		// Determinate user scroll direction
 		slideShow.scrollDown = e.wheelDelta < 0 ? true : false;
 
@@ -154,6 +153,19 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	}, false);
 
+	let portrait = false;
+
+	const handleOrientation = () => {
+		if (window.innerWidth < window.innerHeight) {
+			portrait = true;
+		} else {
+			landscape = true;
+		}
+	};
+
+	// Change value of portrait's let
+	handleOrientation();
+
 	window.addEventListener('resize', () => {
 
 		// Re-initialization slideShow on resize
@@ -163,23 +175,25 @@ window.addEventListener('DOMContentLoaded', () => {
 		if (detectmob() === false) {
 			slideShow.setHeight();
 		}
+
+		// fix bug on safari mobile : on scroll the window is resizing herself
+		// Re-calculate 100% viewport height on mobiles devices on orientation change
+		if (portrait) {
+			if (window.innerWidth > window.innerHeight) {
+				console.log('landscape');
+				slideShow.setHeight();
+				portrait = false;
+			}
+		} else {
+			if (window.innerWidth < window.innerHeight) {
+				console.log('portrait');
+				slideShow.setHeight();
+				portrait = true;
+			}
+		}
+
 	}, false);
 
 	// NEW SLIDE SHOW
-
-	const mql = window.matchMedia("(orientation: portrait)");
-	
-	if (detectmob()) {
-		mql.addListener(handleOrientationChange);
-		handleOrientationChange(mql);		
-	}
-
-	function handleOrientationChange(mql) {
-	  if (mql.matches) {
-	    slideShow.setHeight();
-	  } else {
-	    slideShow.setHeight();
-	  }
-	}
 	
 }, false);
