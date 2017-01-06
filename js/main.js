@@ -114,7 +114,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	document.addEventListener('wheel', (e) => {
 		// Determinate user scroll direction
-		slideShow.scrollDown = e.wheelDelta < 0 ? true : false;
+		slideShow.scrollDown = e.deltaY > 0 ? true : false;
 
 		// Play slideShow on scroll
 		if (slideShow.active === true) {
@@ -159,7 +159,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		if (window.innerWidth < window.innerHeight) {
 			portrait = true;
 		} else {
-			landscape = true;
+			portrait = false;
 		}
 	};
 
