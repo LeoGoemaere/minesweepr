@@ -81,13 +81,11 @@ window.addEventListener('DOMContentLoaded', () => {
 			// Re-calculate 100% viewport height on mobiles devices on orientation change
 			if (portrait) {
 				if (window.innerWidth > window.innerHeight) {
-					console.log('landscape');
 					setHeight();
 					portrait = false;
 				}
 			} else {
 				if (window.innerWidth < window.innerHeight) {
-					console.log('portrait');
 					setHeight();
 					portrait = true;
 				}
